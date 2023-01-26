@@ -1,5 +1,5 @@
 import telebot
-import config
+import config.env
 
 from telebot import types
 
