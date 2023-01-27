@@ -1,9 +1,14 @@
 import telebot
-import config.env
+import os
 
+# from telebot import apihelper
 from telebot import types
+from dotenv import load_dotenv
 
-bot = telebot.TeleBot(config.code)
+bot = telebot.TeleBot(str(os.getenv("numbers")) + ":" + str(os.getenv("letters")))
+
+# apihelper.proxy = {
+#         'https': 'socks5://
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -37,6 +42,7 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, "future file")
             elif call.data == "qr":
                 bot.send_message(call.message.chat.id, "future qr code")
+            bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
             
             bot.send_message(call.message.chat.id, "try to configure vpn. If you cannot, write ...")
 
